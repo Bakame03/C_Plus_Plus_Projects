@@ -20,7 +20,23 @@ size_t plus_grand_bloc_allouable() {
         }
     }
 
-    // pour le moment on retourne uniquement la valeur "moins" ;
-    // plus tard on fera la recherche dichotomique entre moins et plus.
+    // phase 2 : on a maintenant une fourchette moins, plus
+    // moins est allouable et plus ne l'est pas. on cherche le maximum
+    // allouable en coupant l'intervalle en deux.
+    while (plus - moins > 1) {
+        size_t milieu = (moins + plus) / 2;
+        try {
+            char *p = new char[milieu];
+            // l'allocation a reussi, on peut avancer la borne inférieure
+            moins = milieu;
+
+            delete[] p; // liberer le bloc alloue
+        } catch (const std::bad_alloc &) {
+            // l'allocation a echoue pour "milieu", donc la borne superieure
+            // descend.
+            plus = milieu;
+        }
+    }
+
     return moins;
 }
