@@ -26,6 +26,7 @@ private slots:
     void convertirMetre(double val);
     void convertirInch(double val);
     void convertirFoot(double val);
+    void about();
 };
 #endif // FENETRE_H
 

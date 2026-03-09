@@ -1,5 +1,6 @@
 #include "fenetre.h"
 #include <QApplication>  
+#include <QMessageBox>
 
 Fenetre::Fenetre(QWidget *parent)
     : QWidget(parent)
@@ -41,6 +42,7 @@ Fenetre::Fenetre(QWidget *parent)
     mainLayout->addLayout(buttonLayout);
 
     connect(bQuitter, SIGNAL(clicked()), qApp, SLOT(quit()));
+    connect(bAbout, SIGNAL(clicked()), this, SLOT(about()));
 
     setLayout(mainLayout);
 }
@@ -76,6 +78,16 @@ void Fenetre::convertirInch(double val)
     valeurFoot->setValue(m * 3.28084);
     valeurMetre->blockSignals(false);
     valeurFoot->blockSignals(false);
+}
+
+void Fenetre::about()
+{
+    QMessageBox msgBox(this);
+    msgBox.setWindowTitle("About");
+    msgBox.setIcon(QMessageBox::Question);
+    msgBox.setText("ConvertDist");
+    msgBox.setInformativeText("Un programme de conversion entre mètre,\nfoot et inch par NOM Prénom (c) 2022");
+    msgBox.exec();
 }
 
 Fenetre::~Fenetre() {}
