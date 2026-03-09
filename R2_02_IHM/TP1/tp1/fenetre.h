@@ -18,6 +18,7 @@ private:
     QDoubleSpinBox* valeurMetre;
     QDoubleSpinBox* valeurFoot;
     QDoubleSpinBox* valeurInch;
+    QPushButton *bQuitter;
 };
 #endif // FENETRE_H
 
