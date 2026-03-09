@@ -11,6 +11,7 @@ Fenetre::Fenetre(QWidget *parent)
     valeurMetre = new QDoubleSpinBox(this);
     valeurFoot = new QDoubleSpinBox(this);
     valeurInch = new QDoubleSpinBox(this);
+    bAbout = new QPushButton("About", this);
     bQuitter = new QPushButton("Quitter", this);
 
     connect(valeurMetre, SIGNAL(valueChanged(double)), this, SLOT(convertirMetre(double)));
@@ -35,6 +36,7 @@ Fenetre::Fenetre(QWidget *parent)
     mainLayout->addLayout(formLayout);
 
     QHBoxLayout *buttonLayout = new QHBoxLayout;
+    buttonLayout->addWidget(bAbout);
     buttonLayout->addWidget(bQuitter);
     mainLayout->addLayout(buttonLayout);
 

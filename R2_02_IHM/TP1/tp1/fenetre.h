@@ -20,6 +20,7 @@ private:
     QDoubleSpinBox* valeurFoot;
     QDoubleSpinBox* valeurInch;
     QPushButton *bQuitter;
+    QPushButton *bAbout;
 
 private slots:
     void convertirMetre(double val);
