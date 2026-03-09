@@ -10,6 +10,7 @@ Fenetre::Fenetre(QWidget *parent)
     valeurMetre = new QDoubleSpinBox(this);
     valeurFoot = new QDoubleSpinBox(this);
     valeurInch = new QDoubleSpinBox(this);
+    bQuitter = new QPushButton("Quitter", this);
 
     valeurMetre->setMaximum(1000000);
     valeurFoot->setMaximum(1000000);
@@ -29,6 +30,7 @@ Fenetre::Fenetre(QWidget *parent)
     mainLayout->addLayout(formLayout);
 
     QHBoxLayout *buttonLayout = new QHBoxLayout;
+    buttonLayout->addWidget(bQuitter);
     mainLayout->addLayout(buttonLayout);
 
     setLayout(mainLayout);

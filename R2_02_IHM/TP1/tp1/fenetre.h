@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QDoubleSpinBox>
+#include <QPushButton>
 #include <QVBoxLayout>
 #include <QFormLayout>
 #include <QHBoxLayout>
