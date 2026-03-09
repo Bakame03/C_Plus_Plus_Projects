@@ -15,7 +15,7 @@ Fenetre::Fenetre(QWidget *parent)
 
     connect(valeurMetre, SIGNAL(valueChanged(double)), this, SLOT(convertirMetre(double)));
     connect(valeurFoot,  SIGNAL(valueChanged(double)), this, SLOT(convertirFoot(double)));
-    connect(valeurInch,  SIGNAL(valueChanged(double)), this, SLOT(convertirInch(double));
+    connect(valeurInch,  SIGNAL(valueChanged(double)), this, SLOT(convertirInch(double)));
 
     valeurMetre->setMaximum(1000000);
     valeurFoot->setMaximum(1000000);
