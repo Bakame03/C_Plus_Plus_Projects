@@ -20,3 +20,4 @@ private:
     QDoubleSpinBox* valeurInch;
 };
 #endif // FENETRE_H
+
