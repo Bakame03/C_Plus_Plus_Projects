@@ -20,6 +20,11 @@ private:
     QDoubleSpinBox* valeurFoot;
     QDoubleSpinBox* valeurInch;
     QPushButton *bQuitter;
+
+private slots:
+    void convertirMetre(double val);
+    void convertirInch(double val);
+    void convertirFoot(double val);
 };
 #endif // FENETRE_H
 
