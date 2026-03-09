@@ -1,5 +1,5 @@
 #include "fenetre.h"
-#include <QApplication>  // needed for qApp->quit()
+#include <QApplication>  
 
 Fenetre::Fenetre(QWidget *parent)
     : QWidget(parent)
@@ -34,7 +34,6 @@ Fenetre::Fenetre(QWidget *parent)
     buttonLayout->addWidget(bQuitter);
     mainLayout->addLayout(buttonLayout);
 
-    // signal/slot pour quitter l'application
     connect(bQuitter, SIGNAL(clicked()), qApp, SLOT(quit()));
 
     setLayout(mainLayout);
