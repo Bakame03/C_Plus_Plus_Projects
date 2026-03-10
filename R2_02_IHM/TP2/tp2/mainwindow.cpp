@@ -38,6 +38,10 @@ MainWindow::MainWindow(QWidget *parent)
     QMenu *texteMenu = new QMenu(QString::fromUtf8("&Texte"), this);
     menuBar()->addMenu(texteMenu);
 
+    actionFonte = new QAction(QString::fromUtf8("Fonte"), this);
+    connect(actionFonte, SIGNAL(triggered()), this, SLOT(choixFonte()));
+    texteMenu->addAction(actionFonte);
+
     actionCouleur = new QAction(QString::fromUtf8("Couleur"), this);
     texteMenu->addAction(actionCouleur);
 
@@ -50,6 +54,16 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 MainWindow::~MainWindow() {}
+
+void MainWindow::choixFonte()
+{
+    bool ok;
+    QFont font = QFontDialog::getFont(&ok, textEdit->currentFont(), this);
+    if (ok)
+    {
+        textEdit->setCurrentFont(font);
+    }
+}
 
 void MainWindow::ouvrir()
 {
