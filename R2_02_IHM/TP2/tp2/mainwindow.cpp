@@ -107,3 +107,12 @@ void MainWindow::enregistrer()
         }
     }
 }
+
+void MainWindow::choixCouleur()
+{
+    QColor color = QColorDialog::getColor(textEdit->textColor(), this);
+    if (color.isValid())
+    {
+        textEdit->setTextColor(color);
+    }
+}
