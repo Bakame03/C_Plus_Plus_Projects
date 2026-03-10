@@ -20,6 +20,7 @@ public:
 
 private slots:
     void ouvrir();
+    void enregistrer();
 
 private:
     QTextEdit *textEdit;

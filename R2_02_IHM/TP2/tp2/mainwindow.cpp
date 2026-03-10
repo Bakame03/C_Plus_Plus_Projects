@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     actionEnregistrer = new QAction(QString::fromUtf8("Enregistrer"), this);
     actionEnregistrer->setShortcut(QKeySequence::Save);
+    connect(actionEnregistrer, SIGNAL(triggered()), this, SLOT(enregistrer()));
     fichierMenu->addAction(actionEnregistrer);
 
     fichierMenu->addSeparator();
@@ -68,5 +69,26 @@ void MainWindow::ouvrir()
             file.close();
         }
         setWindowTitle(fileName);
+    }
+}
+
+void MainWindow::enregistrer()
+{
+    QString fileName = QFileDialog::getSaveFileName(
+        this,
+        QString::fromUtf8("Enregistrer un fichier"),
+        "",
+        QString::fromUtf8("Fichiers textes (*.txt);;Tous les fichiers (*)"));
+
+    if (fileName != "")
+    {
+        QFile file(fileName);
+        if (file.open(QIODevice::ReadWrite))
+        {
+            QTextStream stream(&file);
+            stream << textEdit->toHtml();
+            file.flush();
+            file.close();
+        }
     }
 }
