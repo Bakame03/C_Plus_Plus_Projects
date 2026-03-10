@@ -43,6 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
     texteMenu->addAction(actionFonte);
 
     actionCouleur = new QAction(QString::fromUtf8("Couleur"), this);
+    connect(actionCouleur, SIGNAL(triggered()), this, SLOT(choixCouleur()));
     texteMenu->addAction(actionCouleur);
 
     texteMenu->addSeparator();

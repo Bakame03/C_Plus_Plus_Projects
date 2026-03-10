@@ -10,6 +10,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QFontDialog>
+#include <QColorDialog>
 
 class MainWindow : public QMainWindow
 {
@@ -23,6 +24,7 @@ private slots:
     void ouvrir();
     void enregistrer();
     void choixFonte();
+    void choixCouleur();
 
 private:
     QTextEdit *textEdit;
