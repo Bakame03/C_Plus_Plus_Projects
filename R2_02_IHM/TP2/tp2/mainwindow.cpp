@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     actionOuvrir = new QAction(QString::fromUtf8("Ouvrir"), this);
     actionOuvrir->setShortcut(QKeySequence::Open);
+    connect(actionOuvrir, SIGNAL(triggered()), this, SLOT(ouvrir()));
     fichierMenu->addAction(actionOuvrir);
 
     actionEnregistrer = new QAction(QString::fromUtf8("Enregistrer"), this);
@@ -48,3 +49,24 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 MainWindow::~MainWindow() {}
+
+void MainWindow::ouvrir()
+{
+    QString fileName = QFileDialog::getOpenFileName(
+        this,
+        QString::fromUtf8("Ouvrir un fichier"),
+        "",
+        QString::fromUtf8("Fichiers textes (*.txt);;Tous les fichiers (*)"));
+
+    if (fileName != "")
+    {
+        QFile file(fileName);
+        if (file.open(QIODevice::Text | QIODevice::ReadOnly))
+        {
+            QTextStream stream(&file);
+            textEdit->setText(stream.readAll());
+            file.close();
+        }
+        setWindowTitle(fileName);
+    }
+}

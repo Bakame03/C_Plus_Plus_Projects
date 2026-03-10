@@ -6,6 +6,9 @@
 #include <QMenuBar>
 #include <QMenu>
 #include <QAction>
+#include <QFileDialog>
+#include <QFile>
+#include <QTextStream>
 
 class MainWindow : public QMainWindow
 {
@@ -14,6 +17,9 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+private slots:
+    void ouvrir();
 
 private:
     QTextEdit *textEdit;
