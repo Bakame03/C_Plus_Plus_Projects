@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     actionNouveau = new QAction(QString::fromUtf8("Nouveau"), this);
     actionNouveau->setShortcut(QKeySequence::New);
+    connect(actionNouveau, SIGNAL(triggered()), textEdit, SLOT(clear()));
     fichierMenu->addAction(actionNouveau);
 
     actionOuvrir = new QAction(QString::fromUtf8("Ouvrir"), this);
