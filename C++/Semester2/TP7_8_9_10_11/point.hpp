@@ -19,8 +19,9 @@ class Point {
         inline uint getY() const { return y; }
         inline void setXY(uint _x, uint _y) { x = _x; y = _y; }
         bool isOver(uint mouseX, uint mouseY) const;
-        
-    
+        void draw(EZWindow& win, bool filled = false) const;
+        friend ostream& operator<<(ostream& os, const Point& p);
+        friend istream& operator>>(istream& is, Point& p);
 };
 
 #endif
