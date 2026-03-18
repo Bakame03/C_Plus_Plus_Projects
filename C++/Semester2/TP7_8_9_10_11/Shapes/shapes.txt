@@ -1,0 +1,6 @@
+5
+Rectangle #00ff00 134 77 0 2 100 50
+Circle #ff00ff 347 192 0 5 25
+Ellipse #ffff00 364 95 1 1 90 50
+Square #000000 152 174 1 1 50
+Label #969696 196 141 0 1 3 "Mon message"
