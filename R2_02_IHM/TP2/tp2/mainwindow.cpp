@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     labelCaracteres = new QLabel("Caractères : 0");
     barreStatut->addWidget(labelLignes);
     barreStatut->addWidget(labelCaracteres);
+    connect(textEdit, SIGNAL(textChanged()), this, SLOT(afficheInformations()));
 
     // === Menu Fichier ===
     QMenu *fichierMenu = new QMenu(QString::fromUtf8("&Fichier"), this);
