@@ -25,6 +25,7 @@ private slots:
     void enregistrer();
     void choixFonte();
     void choixCouleur();
+    void modeSaut();
 
 private:
     QTextEdit *textEdit;
