@@ -12,6 +12,7 @@
 #include <QFontDialog>
 #include <QColorDialog>
 #include <QStatusBar>
+#include <QLabel>
 
 class MainWindow : public QMainWindow
 {
@@ -27,10 +28,13 @@ private slots:
     void choixFonte();
     void choixCouleur();
     void modeSaut();
+    void afficheInformations();
 
 private:
     QTextEdit   *textEdit;
     QStatusBar  *barreStatut;
+    QLabel      *labelLignes;
+    QLabel      *labelCaracteres;
 
     // Actions menu Fichier
     QAction *actionNouveau;

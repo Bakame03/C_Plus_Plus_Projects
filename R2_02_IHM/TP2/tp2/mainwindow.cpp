@@ -9,6 +9,10 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(textEdit);
     textEdit->setPlaceholderText("Commencez à taper votre texte ici...");
     barreStatut = statusBar();
+    labelLignes    = new QLabel("Lignes : 0");
+    labelCaracteres = new QLabel("Caractères : 0");
+    barreStatut->addWidget(labelLignes);
+    barreStatut->addWidget(labelCaracteres);
 
     // === Menu Fichier ===
     QMenu *fichierMenu = new QMenu(QString::fromUtf8("&Fichier"), this);
@@ -141,4 +145,12 @@ void MainWindow::modeSaut()
         textEdit->setWordWrapMode(QTextOption::WordWrap);
     else
         textEdit->setWordWrapMode(QTextOption::NoWrap);
+}
+
+void MainWindow::afficheInformations()
+{
+    int nbLignes = textEdit->document()->blockCount();
+    int nbCaract = textEdit->document()->characterCount() - 1; // -1 pour exclure le \0 final
+    labelLignes->setText(QString::fromUtf8("Lignes : ") + QString::number(nbLignes));
+    labelCaracteres->setText(QString::fromUtf8("Caractères : ") + QString::number(nbCaract));
 }
