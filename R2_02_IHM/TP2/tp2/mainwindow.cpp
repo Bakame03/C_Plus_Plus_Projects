@@ -53,6 +53,21 @@ MainWindow::MainWindow(QWidget *parent)
     actionSaut->setChecked(true);
     connect(actionSaut, SIGNAL(triggered()), this, SLOT(modeSaut()));
     texteMenu->addAction(actionSaut);
+
+    // === Barre d'outils Fichier ===
+    QToolBar *fichierToolBar = addToolBar(QString::fromUtf8("Fichier"));
+    fichierToolBar->addAction(actionNouveau);
+    fichierToolBar->addAction(actionOuvrir);
+    fichierToolBar->addAction(actionEnregistrer);
+    fichierToolBar->addSeparator();
+    fichierToolBar->addAction(actionQuitter);
+
+    // === Barre d'outils Texte ===
+    QToolBar *texteToolBar = addToolBar(QString::fromUtf8("Texte"));
+    texteToolBar->addAction(actionFonte);
+    texteToolBar->addAction(actionCouleur);
+    texteToolBar->addSeparator();
+    texteToolBar->addAction(actionSaut);
 }
 
 MainWindow::~MainWindow() {}
