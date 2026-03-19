@@ -11,6 +11,7 @@
 #include <QTextStream>
 #include <QFontDialog>
 #include <QColorDialog>
+#include <QStatusBar>
 
 class MainWindow : public QMainWindow
 {
@@ -28,7 +29,8 @@ private slots:
     void modeSaut();
 
 private:
-    QTextEdit *textEdit;
+    QTextEdit   *textEdit;
+    QStatusBar  *barreStatut;
 
     // Actions menu Fichier
     QAction *actionNouveau;

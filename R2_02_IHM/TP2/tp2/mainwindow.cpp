@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
     textEdit = new QTextEdit(this);
     setCentralWidget(textEdit);
     textEdit->setPlaceholderText("Commencez à taper votre texte ici...");
+    barreStatut = statusBar();
 
     // === Menu Fichier ===
     QMenu *fichierMenu = new QMenu(QString::fromUtf8("&Fichier"), this);
