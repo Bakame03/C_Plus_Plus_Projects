@@ -48,11 +48,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     texteMenu->addSeparator();
 
-    actionSautLigne = new QAction(QString::fromUtf8("Saut à la ligne automatique"), this);
-    actionSautLigne->setCheckable(true);
-    actionSautLigne->setChecked(true);
-    connect(actionSautLigne, SIGNAL(triggered()), this, SLOT(modeSaut()));
-    texteMenu->addAction(actionSautLigne);
+    actionSaut = new QAction(QString::fromUtf8("Saut à la ligne automatique"), this);
+    actionSaut->setCheckable(true);
+    actionSaut->setChecked(true);
+    connect(actionSaut, SIGNAL(triggered()), this, SLOT(modeSaut()));
+    texteMenu->addAction(actionSaut);
 }
 
 MainWindow::~MainWindow() {}
@@ -120,7 +120,7 @@ void MainWindow::choixCouleur()
 
 void MainWindow::modeSaut()
 {
-    if (actionSautLigne->isChecked())
+    if (actionSaut->isChecked())
         textEdit->setLineWrapMode(QTextEdit::WidgetWidth);
     else
         textEdit->setLineWrapMode(QTextEdit::NoWrap);

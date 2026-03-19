@@ -39,6 +39,6 @@ private:
     // Actions menu Texte
     QAction *actionFonte;
     QAction *actionCouleur;
-    QAction *actionSautLigne;
+    QAction *actionSaut;
 };
 #endif // MAINWINDOW_H
