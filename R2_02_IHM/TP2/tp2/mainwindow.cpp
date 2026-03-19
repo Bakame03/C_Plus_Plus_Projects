@@ -121,7 +121,7 @@ void MainWindow::choixCouleur()
 void MainWindow::modeSaut()
 {
     if (actionSaut->isChecked())
-        textEdit->setLineWrapMode(QTextEdit::WidgetWidth);
+        textEdit->setWordWrapMode(QTextOption::WordWrap);
     else
-        textEdit->setLineWrapMode(QTextEdit::NoWrap);
+        textEdit->setWordWrapMode(QTextOption::NoWrap);
 }
