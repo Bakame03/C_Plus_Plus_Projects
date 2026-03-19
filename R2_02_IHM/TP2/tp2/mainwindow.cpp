@@ -149,8 +149,8 @@ void MainWindow::modeSaut()
 
 void MainWindow::afficheInformations()
 {
-    int nbLignes = textEdit->document()->blockCount();
-    int nbCaract = textEdit->document()->characterCount() - 1; // -1 pour exclure le \0 final
-    labelLignes->setText(QString::fromUtf8("Lignes : ") + QString::number(nbLignes));
-    labelCaracteres->setText(QString::fromUtf8("Caractères : ") + QString::number(nbCaract));
+    int nbLignes = textEdit->document()->lineCount();
+    int nbCaract = textEdit->document()->characterCount();
+    labelLignes->setText(QStringLiteral("nb lignes : %1").arg(nbLignes));
+    labelCaracteres->setText(QStringLiteral("nb caractères : %1").arg(nbCaract));
 }
