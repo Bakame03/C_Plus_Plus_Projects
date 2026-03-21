@@ -19,12 +19,19 @@ class ListOfStrings
         size_t count;
         StringNode* first;
         StringNode* last;
+        void push_front(StringNode* node);
+        void push_back(StringNode* node);
+        
 
     public:
         ListOfStrings();
         ListOfStrings(const ListOfStrings&);
         ~ListOfStrings();
         inline size_t size() const { return count; };
+        void push_front(std::string str);
+        void push_back(std::string str);
+        
+
 };
 
 #endif //__LISTOFSTRINGS_HPP__
