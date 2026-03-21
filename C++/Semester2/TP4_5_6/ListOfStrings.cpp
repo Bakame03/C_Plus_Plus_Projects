@@ -94,3 +94,18 @@ void ListOfStrings::push_back(string str)
 {
     push_back(new StringNode(str));
 }
+
+ostream& operator<<(ostream& os, const ListOfStrings& liste)
+{
+    os << "{";
+    ListOfStrings::StringNode* courant = liste.first;
+    while (courant != nullptr)
+    {
+        os << courant->value;
+        if (courant->next != nullptr)
+            os << ",";
+        courant = courant->next;
+    }
+    os << "}";
+    return os;
+}
