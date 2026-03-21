@@ -47,6 +47,16 @@ ListOfStrings::~ListOfStrings()
     }
 }
 
+const string& ListOfStrings::front() const
+{
+    return first->value;
+}
+
+const string& ListOfStrings::back() const
+{
+    return last->value;
+}
+
 void ListOfStrings::push_front(StringNode* node)
 {
     if(first == nullptr)

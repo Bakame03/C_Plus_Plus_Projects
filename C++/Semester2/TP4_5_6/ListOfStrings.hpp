@@ -28,6 +28,8 @@ class ListOfStrings
         ListOfStrings(const ListOfStrings&);
         ~ListOfStrings();
         inline size_t size() const { return count; };
+        const std::string& front() const;
+        const std::string& back() const;
         void push_front(std::string str);
         void push_back(std::string str);
         
