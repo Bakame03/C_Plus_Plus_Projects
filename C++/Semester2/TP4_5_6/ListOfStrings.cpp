@@ -95,6 +95,27 @@ void ListOfStrings::push_back(string str)
     push_back(new StringNode(str));
 }
 
+void ListOfStrings::pop_front()
+{
+    if (first == nullptr)
+        return;
+
+    StringNode* aSupprimer = first; 
+
+    if (first == last)
+    {
+        first = nullptr;
+        last = nullptr;
+    }
+    else
+    {
+        first = first->next;
+    }
+
+    delete aSupprimer;
+    count--;
+}
+
 ostream& operator<<(ostream& os, const ListOfStrings& liste)
 {
     os << "{";

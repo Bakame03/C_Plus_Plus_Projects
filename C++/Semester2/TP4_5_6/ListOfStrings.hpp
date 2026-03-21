@@ -32,6 +32,7 @@ class ListOfStrings
         const std::string& back() const;
         void push_front(std::string str);
         void push_back(std::string str);
+        void pop_front();
         friend std::ostream& operator<<(std::ostream& os, const ListOfStrings& liste);
         
 
