@@ -2,6 +2,20 @@
 
 using namespace std;
 
+ListOfStrings::StringNode::StringNode(string val, StringNode* suivant)
+    : value(val),
+      next(suivant)
+{}
+
+
+ListOfStrings::StringNode::StringNode(const StringNode& other)
+    : value(other.value),
+      next(nullptr)
+{}
+
+ListOfStrings::StringNode::~StringNode()
+{}
+
 ListOfStrings::ListOfStrings()
     : count(0),
       first(nullptr),
