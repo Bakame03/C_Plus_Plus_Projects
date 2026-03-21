@@ -116,6 +116,33 @@ void ListOfStrings::pop_front()
     count--;
 }
 
+void ListOfStrings::pop_back()
+{
+    if (last == nullptr)
+        return; // liste vide, rien à faire
+
+    StringNode* aSupprimer = last; 
+
+    if (first == last)
+    {
+        first = nullptr;
+        last = nullptr;
+    }
+    else
+    {
+        StringNode* avantDernier = first;
+        while (avantDernier->next != last)
+        {
+            avantDernier = avantDernier->next;
+        }
+        avantDernier->next = nullptr;
+        last = avantDernier;
+    }
+
+    delete aSupprimer;
+    count--;
+}
+
 ostream& operator<<(ostream& os, const ListOfStrings& liste)
 {
     os << "{";
