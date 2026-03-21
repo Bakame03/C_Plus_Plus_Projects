@@ -22,6 +22,31 @@ ListOfStrings::ListOfStrings()
       last(nullptr)
 {}
 
+ListOfStrings::ListOfStrings(const ListOfStrings& other)
+    : count(0),
+      first(nullptr),
+      last(nullptr)
+{
+    StringNode* courant = other.first;
+    while (courant != nullptr)
+    {
+        push_back(courant->value);
+        courant = courant->next;
+    }
+}
+
+
+ListOfStrings::~ListOfStrings()
+{
+    StringNode* courant = first;
+    while (courant != nullptr)
+    {
+        StringNode* suivant = courant->next;
+        delete courant;
+        courant = suivant;      
+    }
+}
+
 void ListOfStrings::push_front(StringNode* node)
 {
     if(first == nullptr)
