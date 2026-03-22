@@ -183,6 +183,35 @@ void ListOfStrings::splice(ListOfStrings& other)
     other.count = 0;
 }
 
+void ListOfStrings::reverse()
+{
+    // 1. S'il n'y a qu'un maillon ou zéro, c'est déjà à l'envers
+    if (first == nullptr || first == last)
+        return;
+
+    StringNode* precedent = nullptr;
+    StringNode* courant = first;
+    StringNode* suivant = nullptr;
+
+    // 2. L'actuel "first" va devenir le "last"
+    last = first;
+
+    // 3. On parcourt la liste et on retourne chaque flèche vers l'arrière
+    while (courant != nullptr)
+    {
+        suivant = courant->next;    
+        courant->next = precedent;  
+        precedent = courant;        
+        courant = suivant;          
+    }
+
+    // 4. À la fin, "precedent" est sur l'ancien dernier maillon
+    // qui devient donc notre nouveau premier maillon
+    first = precedent;
+    
+    precedent = nullptr;
+}
+
 ostream& operator<<(ostream& os, const ListOfStrings& liste)
 {
     os << "{";
