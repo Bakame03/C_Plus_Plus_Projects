@@ -143,6 +143,20 @@ void ListOfStrings::pop_back()
     count--;
 }
 
+void ListOfStrings::clear()
+{
+    StringNode* courant = first;
+    while (courant != nullptr)
+    {
+        StringNode* suivant = courant->next;
+        delete courant;
+        courant = suivant;
+    }
+    first = nullptr;
+    last = nullptr;
+    count = 0;
+}
+
 ostream& operator<<(ostream& os, const ListOfStrings& liste)
 {
     os << "{";
