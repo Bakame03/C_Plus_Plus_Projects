@@ -247,7 +247,40 @@ void ListOfStrings::insert_sorted(StringNode* node)
 
 void ListOfStrings::insert_sorted(string str)
 {
-    insert_sorted(new StringNode(str));
+    insert_sorted(new StringNode(str)); 
+}
+
+void ListOfStrings::sort()
+{
+    // 1. Liste vide ou avec un seul maillon : c'est déjà trié
+    if (first == nullptr || first == last)
+        return;
+
+    ListOfStrings listeTriee;
+
+    // 2. On extrait nos maillons actuels un par un
+    StringNode* courant = first;
+    while (courant != nullptr)
+    {
+        StringNode* suivant = courant->next; // On mémorise la suite
+
+        // On détache complètement ce maillon du reste de la liste
+        courant->next = nullptr;
+
+        // On le donne à notre nouvelle liste pour qu'elle le range au bon endroit
+        listeTriee.insert_sorted(courant);
+
+        courant = suivant; // On passe au maillon d'après
+    }
+
+    // 3. On récupère le résultat
+    first = listeTriee.first;
+    last = listeTriee.last;
+
+    // on enleve les droits d'owner à listeTriee
+    listeTriee.first = nullptr;
+    listeTriee.last = nullptr;
+    listeTriee.count = 0;
 }
 
 ostream& operator<<(ostream& os, const ListOfStrings& liste)

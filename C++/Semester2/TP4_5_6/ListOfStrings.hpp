@@ -39,6 +39,7 @@ class ListOfStrings
         void splice(ListOfStrings& other);
         void reverse();
         void insert_sorted(std::string str);
+        void sort();
         friend std::ostream& operator<<(std::ostream& os, const ListOfStrings& liste);
         
 
