@@ -157,6 +157,32 @@ void ListOfStrings::clear()
     count = 0;
 }
 
+void ListOfStrings::splice(ListOfStrings& other)
+{
+    // 1. Si l'autre liste est vide, il n'y a rien à faire
+    if (other.first == nullptr)
+        return;
+
+    // 2. Si NOTRE liste est vide, on récupère directement les pointeurs de l'autre
+    if (first == nullptr)
+    {
+        first = other.first;
+        last = other.last;
+    }
+    // 3. on accroche l'autre liste à la fin de la nôtre
+    else
+    {
+        last->next = other.first;  
+        last = other.last;         
+    }
+    count += other.count;
+
+    // 5. On vide l'autre liste pour lui enlever les droit de OWNER sur la liste
+    other.first = nullptr;
+    other.last = nullptr;
+    other.count = 0;
+}
+
 ostream& operator<<(ostream& os, const ListOfStrings& liste)
 {
     os << "{";

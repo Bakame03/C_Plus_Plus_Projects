@@ -35,9 +35,11 @@ class ListOfStrings
         void pop_front();
         void pop_back();
         void clear();
+        void splice(ListOfStrings& other);
+        void reverse();
         friend std::ostream& operator<<(std::ostream& os, const ListOfStrings& liste);
         
 
 };
 
-#endif //__LISTOFSTRINGS_HPP__
+#endif
