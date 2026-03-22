@@ -277,7 +277,7 @@ void ListOfStrings::sort()
     first = listeTriee.first;
     last = listeTriee.last;
 
-    // on enleve les droits d'owner à listeTriee
+    // 4. on enleve les droits d'owner à listeTriee
     listeTriee.first = nullptr;
     listeTriee.last = nullptr;
     listeTriee.count = 0;
