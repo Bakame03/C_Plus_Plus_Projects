@@ -21,6 +21,7 @@ class ListOfStrings
         StringNode* last;
         void push_front(StringNode* node);
         void push_back(StringNode* node);
+        void insert_sorted(StringNode* node);
         
 
     public:
@@ -37,6 +38,7 @@ class ListOfStrings
         void clear();
         void splice(ListOfStrings& other);
         void reverse();
+        void insert_sorted(std::string str);
         friend std::ostream& operator<<(std::ostream& os, const ListOfStrings& liste);
         
 

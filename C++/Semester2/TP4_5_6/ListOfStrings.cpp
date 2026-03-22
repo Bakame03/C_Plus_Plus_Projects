@@ -212,6 +212,44 @@ void ListOfStrings::reverse()
     precedent = nullptr;
 }
 
+void ListOfStrings::insert_sorted(StringNode* node)
+{
+    // 1. Cas : la liste est vide OU le nouveau mot est "plus petit" que le premier
+    // on peut comparer grâce à <= pour l'ordre alphabétique
+    if (first == nullptr || node->value <= first->value)
+    {
+        node->next = first;
+        first = node;
+        if (last == nullptr) // Si la liste était vide
+            last = node;
+        count++;
+        return;
+    }
+
+    // 2. Cas général : on parcourt la liste pour trouver où insérer
+    // On s'arrête quand on arrive à la fin OU quand la valeur suivante est "trop grande"
+    StringNode* courant = first;
+    while (courant->next != nullptr && courant->next->value < node->value)
+    {
+        courant = courant->next;
+    }
+
+    // 3. On coupe la chaîne et on insère notre maillon ici
+    node->next = courant->next;
+    courant->next = node;
+
+    // 4. Si on a inséré tout à la fin, on met à jour "last"
+    if (node->next == nullptr)
+        last = node;
+
+    count++;
+}
+
+void ListOfStrings::insert_sorted(string str)
+{
+    insert_sorted(new StringNode(str));
+}
+
 ostream& operator<<(ostream& os, const ListOfStrings& liste)
 {
     os << "{";
