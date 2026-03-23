@@ -70,16 +70,21 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow() {}
 
+#include <QMessageBox>
+
 void MainWindow::ouvrirImage()
 {
     QString fileName = QFileDialog::getOpenFileName(
         this,
         QString::fromUtf8("Ouvrir une image"),
         "",
-        QString::fromUtf8("Images (*.png *.jpg *.jpeg)"));
+        QString::fromUtf8("Fichiers Images (*.png *.jpg *.jpeg);;Tous les fichiers (*)"));
 
     if (fileName != "") {
-        image.load(fileName);
+        if (!image.load(fileName)) {
+            QMessageBox::warning(this, "Erreur", "Impossible de charger l'image. Le format JPEG n'est peut-être pas supporté par votre installation Qt.");
+            return;
+        }
         imageLabel.setPixmap(QPixmap::fromImage(image));
         imageLabel.setScaledContents(true);
         imageLabel.resize(image.size());
