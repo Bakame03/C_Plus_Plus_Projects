@@ -22,6 +22,12 @@ void MainWindow::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
     
+    // Adaptation automatique au redimensionnement
+    int side = qMin(width(), height());
+    painter.setViewport((width() - side) / 2, (height() - side) / 2, side, side);
+    painter.setWindow(0, 0, 300, 300); // Garde le repère logique [0..300]
+
+    
     // On fait ici les affichages graphiques :
     afficheFond(painter);
     afficheGraduations(painter);
@@ -80,12 +86,12 @@ void MainWindow::afficheAiguilles(QPainter &painter)
     double angleM = ((m + s / 60.0) / 60.0) * 2 * M_PI - M_PI / 2.0;
     double angleH = (((h % 12) + m / 60.0) / 12.0) * 2 * M_PI - M_PI / 2.0;
     
-    // Aiguille des heures (rouge, épaisseur 6, longueur 70)
-    painter.setPen(QPen(Qt::red, 6));
+    // Aiguille des heures (rouge, épaisseur 6, arrondie, longueur 70)
+    painter.setPen(QPen(Qt::red, 6, Qt::SolidLine, Qt::RoundCap));
     painter.drawLine(150, 150, 150 + 70 * cos(angleH), 150 + 70 * sin(angleH));
     
-    // Aiguille des minutes (bleue, épaisseur 3, longueur 100)
-    painter.setPen(QPen(Qt::blue, 3));
+    // Aiguille des minutes (bleue, épaisseur 3, arrondie, longueur 100)
+    painter.setPen(QPen(Qt::blue, 3, Qt::SolidLine, Qt::RoundCap));
     painter.drawLine(150, 150, 150 + 100 * cos(angleM), 150 + 100 * sin(angleM));
     
     // Aiguille des secondes (noire, épaisseur 1, longueur 100)
