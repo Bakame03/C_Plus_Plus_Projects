@@ -11,6 +11,16 @@ MainWindow::MainWindow(QWidget *parent)
 {
     QVBoxLayout *layout = new QVBoxLayout();
     
+    // Instanciation des objets graphiques
+    graphique = new QChartView(this);
+    graphe = new QChart();
+    courbe = new QLineSeries(this);
+    
+    graphe->addSeries(courbe);      // Initialise le graphe avec la courbe
+    graphique->setChart(graphe);    // Indique au widget quel graphe afficher
+    
+    layout->addWidget(graphique);   // Ajout du graphique en haut du layout
+    
     // Ajout et configuration de la table
     layout->addWidget(table);
     

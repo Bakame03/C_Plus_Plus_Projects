@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QTableWidget>
+#include <QChartView>
+#include <QChart>
+#include <QLineSeries>
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -17,5 +20,8 @@ private slots:
 
 private:
     QTableWidget *table = new QTableWidget(0, 2, this);
+    QChartView *graphique;
+    QChart *graphe;
+    QLineSeries *courbe;
 };
 #endif // MAINWINDOW_H
