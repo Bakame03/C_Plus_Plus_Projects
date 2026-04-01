@@ -1,0 +1,33 @@
+#include "point.hpp"
+
+Point::Point(uint _x, uint _y) : x(_x), y(_y) {}
+
+Point::Point(const Point& p) : x(p.x), y(p.y) {}
+
+Point::Point(istream& is) : x(0), y(0) {
+    is >> x >> y;
+}
+
+Point::~Point() {}
+
+bool Point::isOver(uint mouseX, uint mouseY) const {
+    return x == mouseX && y == mouseY;
+}
+
+void Point::draw(EZWindow& win, bool filled) const {
+    if (filled) {
+        win.fillCircle(x, y, size);
+    } else {
+        win.drawCircle(x, y, size);
+    }
+}
+
+ostream& operator<<(ostream& os, const Point& p) {
+    os << p.x << " " << p.y;
+    return os;
+}
+
+istream& operator>>(istream& is, Point& p) {
+    is >> p.x >> p.y;
+    return is;
+}

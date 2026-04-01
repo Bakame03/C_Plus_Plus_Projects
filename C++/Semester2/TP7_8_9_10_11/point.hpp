@@ -11,7 +11,7 @@ class Point {
         static const uint size = 5;
         uint x, y;
     public:
-        Point(uint x, uint y);
+        Point(uint _x, uint _y);
         Point(const Point& p);
         Point(istream& is);
         ~Point();
