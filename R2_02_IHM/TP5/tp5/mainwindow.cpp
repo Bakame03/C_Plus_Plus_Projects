@@ -17,9 +17,12 @@ MainWindow::MainWindow(QWidget *parent)
     courbe = new QLineSeries(this);
     
     graphe->addSeries(courbe);      // Initialise le graphe avec la courbe
+    graphe->createDefaultAxes();    // Ajout des axes
+    courbe->setName(QString::fromUtf8("Série de points")); // Légende
+    
     graphique->setChart(graphe);    // Indique au widget quel graphe afficher
     
-    layout->addWidget(graphique);   // Ajout du graphique en haut du layout
+    layout->addWidget(graphique);   // Ajout du graphique en haut       
     
     // Ajout et configuration de la table
     layout->addWidget(table);
