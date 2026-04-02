@@ -17,6 +17,7 @@ public:
 private slots:
     void ajouterPoint();
     void supprimerPoint();
+    void modifieTable(int row, int col);
 
 private:
     QTableWidget *table = new QTableWidget(0, 2, this);

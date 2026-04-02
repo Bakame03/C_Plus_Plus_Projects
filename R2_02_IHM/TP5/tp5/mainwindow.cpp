@@ -44,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(btnAjouter, SIGNAL(clicked()), this, SLOT(ajouterPoint()));
     connect(btnSupprimer, SIGNAL(clicked()), this, SLOT(supprimerPoint()));
+    connect(table, SIGNAL(cellChanged(int, int)), this, SLOT(modifieTable(int, int)));
 
     QWidget *window = new QWidget();
     window->setLayout(layout);
@@ -66,4 +67,9 @@ void MainWindow::supprimerPoint()
         QModelIndex index = selection.at(i);
         table->removeRow(index.row());
     }
+}
+
+void MainWindow::modifieTable(int row, int col)
+{
+    courbe->clear();
 }
