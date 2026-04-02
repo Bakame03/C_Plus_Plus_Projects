@@ -13,12 +13,12 @@ MainWindow::MainWindow(QWidget *parent)
     
     // Instanciation des objets graphiques
     graphique = new QChartView(this);
-    graphe = new QChart();
+    graphe = new QChart();          
     courbe = new QLineSeries(this);
     
     graphe->addSeries(courbe);      // Initialise le graphe avec la courbe
     graphe->createDefaultAxes();    // Ajout des axes
-    // courbe->setName(QString::fromUtf8("Série de points")); // Légende
+    graphe->legend()->hide();       // Masque la légende (supprime le point et le texte)
     
     graphique->setChart(graphe);    // Indique au widget quel graphe afficher
     
