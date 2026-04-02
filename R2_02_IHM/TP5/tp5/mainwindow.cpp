@@ -67,6 +67,8 @@ void MainWindow::supprimerPoint()
         QModelIndex index = selection.at(i);
         table->removeRow(index.row());
     }
+    // Instruction 18 : Actualise le graphe après suppression
+    modifieTable(0, 0);
 }
 
 void MainWindow::modifieTable(int row, int col)
