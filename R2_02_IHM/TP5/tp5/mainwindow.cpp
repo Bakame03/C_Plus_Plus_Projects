@@ -71,5 +71,25 @@ void MainWindow::supprimerPoint()
 
 void MainWindow::modifieTable(int row, int col)
 {
+    // 2) Vide la courbe avant de la recalculer
     courbe->clear();
+    
+    // 3) Balayage de toute la table pour lire les points
+    for (int ligne = 0; ligne < table->rowCount(); ++ligne) {
+        QTableWidgetItem *itemX = table->item(ligne, 0);
+        QTableWidgetItem *itemY = table->item(ligne, 1);
+        
+        if (itemX != nullptr && itemY != nullptr) {
+            // 4) Conversion et ajout à la courbe
+            double x = itemX->text().toDouble();
+            double y = itemY->text().toDouble();
+            courbe->append(x, y);
+        }
+    }
+    
+    // 5) Mise à jour du graphe
+    graphe->removeSeries(courbe);
+    graphe->addSeries(courbe);
+    graphe->createDefaultAxes();
+    graphe->legend()->hide(); // On garde la légende masquée
 }
