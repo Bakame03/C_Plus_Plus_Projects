@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QNetworkReply>            
+#include <QNetworkAccessManager>    
 
 class MainWindow : public QMainWindow
 {
@@ -10,5 +12,12 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+    void chargeJSON(QString url);
+
+private:
+    QNetworkAccessManager manager;
 };
+
+
 #endif // MAINWINDOW_H
