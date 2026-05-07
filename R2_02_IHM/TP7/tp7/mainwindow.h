@@ -6,6 +6,7 @@
 #include <QNetworkAccessManager>    
 #include <QComboBox>                
 #include <QVBoxLayout>
+#include <QLabel>
 
 class MainWindow : public QMainWindow
 {
@@ -20,6 +21,10 @@ public:
 private:
     QNetworkAccessManager manager;
     QComboBox *cityComboBox;
+    QLabel *cityLabel;
+    QLabel *tempLabel;
+    QLabel *descLabel;
+    QLabel *humidityLabel;
 };
 
 
