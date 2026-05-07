@@ -18,13 +18,11 @@ MainWindow::MainWindow(QWidget *parent)
     cityComboBox->addItems(listItems);
     layout->addWidget(cityComboBox);
 
-    // Initialize the labels and add them to the layout
     cityLabel = new QLabel("Ville : En attente...", this);
     tempLabel = new QLabel("Température : ", this);
     descLabel = new QLabel("Description : ", this);
     humidityLabel = new QLabel("Humidité : ", this);
 
-    // Make the text a little bigger and nicer
     QFont font = cityLabel->font();
     font.setPointSize(12);
     cityLabel->setFont(font);
@@ -37,17 +35,36 @@ MainWindow::MainWindow(QWidget *parent)
     layout->addWidget(descLabel);
     layout->addWidget(humidityLabel);
 
-    QString apiKey = "b844741cda192238ffb70b102b8200b7"; 
+    // --- QUESTION 9: The Refresh Button ---
+    refreshButton = new QPushButton("Rafraîchir", this);
+    layout->addWidget(refreshButton);
 
-    connect(cityComboBox, &QComboBox::currentTextChanged, [=](const QString &city) {
-        QString url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
-        chargeJSON(url);
-    });
+    // --- QUESTION 10: The Timer ---
+    timer = new QTimer(this);
 
-    emit cityComboBox->currentTextChanged(cityComboBox->currentText());
+    // Connect all three elements to our helper function!
+    connect(cityComboBox, &QComboBox::currentTextChanged, this, &MainWindow::refreshWeather);
+    connect(refreshButton, &QPushButton::clicked, this, &MainWindow::refreshWeather);
+    connect(timer, &QTimer::timeout, this, &MainWindow::refreshWeather);
+
+    // Start the timer to tick every 60,000 milliseconds (1 minute)
+    timer->start(60000); 
+
+    // Trigger it once so the first city loads immediately on startup
+    refreshWeather();
 }
 
 MainWindow::~MainWindow() {}
+
+// --- Our new helper method ---
+void MainWindow::refreshWeather() 
+{
+    QString apiKey = "b844741cda192238ffb70b102b8200b7"; 
+    QString city = cityComboBox->currentText();
+    QString url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
+    
+    chargeJSON(url);
+}
 
 void MainWindow::chargeJSON(QString url)
 {
@@ -57,24 +74,18 @@ void MainWindow::chargeJSON(QString url)
     QObject::connect(reply, &QNetworkReply::finished, [=]() {
         QString ReplyText = reply->readAll();
 
-        // --- QUESTIONS 6, 7, and 8: Parsing the JSON ---
-        
-        // 1. Convert the raw text into a JSON Document
         QJsonDocument doc = QJsonDocument::fromJson(ReplyText.toUtf8());
         QJsonObject objetJSON = doc.object();
 
-        // 2. Extract specific values
         QString cityName = objetJSON["name"].toString();
         
         QJsonValue weather_main = objetJSON["main"];
-        // The API returns temp in Kelvin by default, so we subtract 273.15 for Celsius
         double temp = weather_main["temp"].toDouble() - 273.15; 
         double humidity = weather_main["humidity"].toDouble();
 
         QJsonValue weather = objetJSON["weather"];
         QString description = weather[0]["description"].toString();
 
-        // 3. Update the UI Labels with the extracted data
         cityLabel->setText("Ville : " + cityName);
         tempLabel->setText("Température : " + QString::number(temp, 'f', 1) + " °C");
         descLabel->setText("Description : " + description);

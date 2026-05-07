@@ -7,6 +7,8 @@
 #include <QComboBox>                
 #include <QVBoxLayout>
 #include <QLabel>
+#include <QPushButton> // Added for Question 9
+#include <QTimer>      // Added for Question 10
 
 class MainWindow : public QMainWindow
 {
@@ -25,7 +27,11 @@ private:
     QLabel *tempLabel;
     QLabel *descLabel;
     QLabel *humidityLabel;
+    
+    QPushButton *refreshButton; // Added for Question 9
+    QTimer *timer;              // Added for Question 10
+    
+    void refreshWeather();      // New helper function
 };
-
 
 #endif // MAINWINDOW_H
