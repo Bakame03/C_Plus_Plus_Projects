@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QNetworkReply>            
 #include <QNetworkAccessManager>    
+#include <QComboBox>                
+#include <QVBoxLayout>
 
 class MainWindow : public QMainWindow
 {
@@ -17,6 +19,7 @@ public:
 
 private:
     QNetworkAccessManager manager;
+    QComboBox *cityComboBox;
 };
 
 
