@@ -9,12 +9,13 @@
 using namespace std;
 
 class Shape {
-protected:
+private:
     EZColor color;
     Point anchor;
     bool filled;
     uint thickness;
 
+protected:
     virtual void write(ostream& os) const = 0; 
 
 public:
