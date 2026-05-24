@@ -85,5 +85,13 @@ ostream& operator<<(ostream& os, const Shape& s) {
 }
 
 Shape* Shape::load(istream& is) {
+    string type;
+    is >> type;
+    if (type == "Rectangle") return new Rectangle(is);
+    if (type == "Ellipse")   return new Ellipse(is);
+    if (type == "Label")     return new Label(is);
+    if (type == "Square")    return new Square(is);
+    if (type == "Circle")    return new Circle(is);
+
     return nullptr;
 }

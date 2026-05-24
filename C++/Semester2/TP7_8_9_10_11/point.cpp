@@ -11,7 +11,9 @@ Point::Point(istream& is) : x(0), y(0) {
 Point::~Point() {}
 
 bool Point::isOver(uint mouseX, uint mouseY) const {
-    return x == mouseX && y == mouseY;
+    // Avec une tolérance de 5 pixels (la taille du point)
+    return (mouseX >= x - size && mouseX <= x + size && 
+            mouseY >= y - size && mouseY <= y + size);
 }
 
 void Point::draw(EZWindow& win, bool filled) const {
