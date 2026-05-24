@@ -26,7 +26,7 @@ void Rectangle::write(ostream& os) const {
 // Implémentation du dessin
 void Rectangle::draw(EZWindow& win) const {
     win.setColor(getColor());
-    win.setThickness(getThickness());
+    win.setThick(getThickness());
     
     // Le point d'ancrage (x, y) est le coin haut-gauche
     uint x1 = getAnchor().getX();

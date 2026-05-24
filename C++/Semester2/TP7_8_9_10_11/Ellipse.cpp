@@ -23,15 +23,15 @@ void Ellipse::write(ostream& os) const {
 
 void Ellipse::draw(EZWindow& win) const {
     win.setColor(getColor());
-    win.setThickness(getThickness());
+    win.setThick(getThickness());
 
     uint x1 = getAnchor().getX();
     uint y1 = getAnchor().getY();
     
     if (isFilled()) {
-        win.fillEllipse(x1, y1, x1 + semiWidth, y1 + semiHeight);
+        win.fillCircle(x1, y1, x1 + semiWidth, y1 + semiHeight);
     } else {
-        win.drawEllipse(x1, y1, x1 + semiWidth, y1 + semiHeight);
+        win.drawCircle(x1, y1, x1 + semiWidth, y1 + semiHeight);
     }
 }
 

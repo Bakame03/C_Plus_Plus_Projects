@@ -17,7 +17,7 @@ void Label::write(ostream& os) const {
 
 void Label::draw(EZWindow& win) const {
     win.setColor(getColor());
-    win.setThickness(getThickness());
+    win.setThick(getThickness());
     win.setFont(fontNum);
     win.drawText(EZAlign::TL, getAnchor().getX(), getAnchor().getY(), msg);
 }
