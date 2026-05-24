@@ -1,1 +1,1 @@
-Point.o: Point.cpp Point.hpp
+Point.o: Point.cpp Point.hpp ez-draw++.hpp

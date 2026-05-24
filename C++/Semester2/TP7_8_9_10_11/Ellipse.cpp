@@ -13,7 +13,7 @@ Ellipse::Ellipse(istream& is) : Shape(is), semiWidth(0), semiHeight(0) {
 // Constructeur à l'identique d'un Circle
 Ellipse::Ellipse(const Circle& c)
     : Shape(c.getColor(), c.getAnchor().getX(), c.getAnchor().getY(), c.getThickness(), c.isFilled()),
-      semiWidth(c.getRadius() * 2), semiHeight(c.getRadius() * 2) {}
+      semiWidth(c.getRadius()), semiHeight(c.getRadius()) {}
 
 Ellipse::~Ellipse() {}
 
@@ -29,9 +29,9 @@ void Ellipse::draw(EZWindow& win) const {
     uint y1 = getAnchor().getY();
     
     if (isFilled()) {
-        win.fillCircle(x1, y1, x1 + semiWidth, y1 + semiHeight);
+        win.fillCircle(x1, y1, x1 + 2 * semiWidth, y1 + 2 * semiHeight);
     } else {
-        win.drawCircle(x1, y1, x1 + semiWidth, y1 + semiHeight);
+        win.drawCircle(x1, y1, x1 + 2 * semiWidth, y1 + 2 * semiHeight);
     }
 }
 

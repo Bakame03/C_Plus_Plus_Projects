@@ -11,18 +11,18 @@ Point::Point(istream& is) : x(0), y(0) {
 Point::~Point() {}
 
 bool Point::isOver(uint mouseX, uint mouseY) const {
-      // Avec une tolérance de 5 pixels (la taille du point)
-    return (mouseX >= x - size && mouseX <= x + size && 
-            mouseY >= y - size && mouseY <= y + size);
+    // Le carré s'étend de size pixels vers la droite et le bas
+    return (mouseX >= x && mouseX <= x + size && 
+            mouseY >= y && mouseY <= y + size);
 }
 
-void Point::draw(EZWindow& win, bool filled) const {
-    if (filled) {
+void Point::draw(EZWindow& win, bool isActive) const {
+    if (isActive) {
         win.setColor(EZColor::red);
-        win.fillRectangle(x - size, y - size, x + size, y + size);
+        win.fillRectangle(x, y, x + size, y + size);
     } else {
         win.setColor(EZColor::black);
-        win.drawRectangle(x - size, y - size, x + size, y + size);
+        win.drawRectangle(x, y, x + size, y + size);
     }
 }
 

@@ -1,8 +1,8 @@
 #include "Circle.hpp"
 
-// On appelle le constructeur de Ellipse avec width = height = radius * 2
+// On appelle le constructeur de Ellipse avec semiWidth = semiHeight = radius
 Circle::Circle(EZColor col, uint x, uint y, uint radius, uint thick, bool fill)
-    : Ellipse(col, x, y, radius * 2, radius * 2, thick, fill) {}
+    : Ellipse(col, x, y, radius, radius, thick, fill) {}
 
 // Constructeur depuis flux : on appelle le constructeur de Ellipse avec des valeurs par défaut pour éviter la lecture, puis on lit manuellement
 Circle::Circle(istream& is) : Ellipse(EZColor::black, 0, 0, 0, 0, 1, false) {
@@ -14,8 +14,8 @@ Circle::Circle(istream& is) : Ellipse(EZColor::black, 0, 0, 0, 0, 1, false) {
 Circle::~Circle() {}
 
 void Circle::setRadius(uint r) {
-    setSemiWidth(r * 2);
-    setSemiHeight(r * 2);
+    setSemiWidth(r);
+    setSemiHeight(r);
 }
 
 void Circle::write(ostream& os) const {
