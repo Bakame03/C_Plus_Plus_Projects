@@ -18,6 +18,7 @@ void SetOfShapes::add(Shape* s) {
 void SetOfShapes::draw(EZWindow& win) const {
     for (Shape* s : shapes) {
         s->draw(win);
+        s->getAnchor().draw(win, false);
     }
 }
 
