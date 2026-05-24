@@ -15,6 +15,11 @@ public:
     inline uint getSize() const { return getWidth(); }
     void setSize(uint s);
 
+protected:
+    virtual void write(ostream& os) const override;
+
+public:
+
     // Redéfinition des méthodes virtuelles
     virtual string getTypeName() const override { return "Square"; }
     virtual void modifyAttributes() override;

@@ -4,14 +4,22 @@
 Square::Square(EZColor col, uint x, uint y, uint size, uint thick, bool fill)
     : Rectangle(col, x, y, size, size, thick, fill) {}
 
-// Constructeur depuis flux : on utilise le constructeur de Rectangle
-Square::Square(istream& is) : Rectangle(is) {}
+// Constructeur depuis flux : on utilise le constructeur de Rectangle avec des valeurs par défaut pour éviter la lecture, puis on lit manuellement
+Square::Square(istream& is) : Rectangle(EZColor::black, 0, 0, 0, 0, 1, false) {
+    EZColor col; uint ax, ay; bool fill; uint thick; uint s;
+    is >> col >> ax >> ay >> fill >> thick >> s;
+    setColor(col); setAnchor(ax, ay); setFilled(fill); setThickness(thick); setSize(s);
+}
 
 Square::~Square() {}
 
 void Square::setSize(uint s) {
     setWidth(s);
     setHeight(s);
+}
+
+void Square::write(ostream& os) const {
+    os << getSize();
 }
 
 void Square::modifyAttributes() {

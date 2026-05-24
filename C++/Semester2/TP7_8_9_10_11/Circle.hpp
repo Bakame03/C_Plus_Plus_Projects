@@ -15,6 +15,11 @@ public:
     inline uint getRadius() const { return getSemiWidth() / 2; }
     void setRadius(uint r);
 
+protected:
+    virtual void write(ostream& os) const override;
+
+public:
+
     // Redéfinition des méthodes virtuelles
     virtual string getTypeName() const override { return "Circle"; }
     virtual void modifyAttributes() override;

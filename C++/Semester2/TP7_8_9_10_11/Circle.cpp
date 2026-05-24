@@ -4,14 +4,22 @@
 Circle::Circle(EZColor col, uint x, uint y, uint radius, uint thick, bool fill)
     : Ellipse(col, x, y, radius * 2, radius * 2, thick, fill) {}
 
-// Constructeur depuis flux : on appelle le constructeur de Ellipse
-Circle::Circle(istream& is) : Ellipse(is) {}
+// Constructeur depuis flux : on appelle le constructeur de Ellipse avec des valeurs par défaut pour éviter la lecture, puis on lit manuellement
+Circle::Circle(istream& is) : Ellipse(EZColor::black, 0, 0, 0, 0, 1, false) {
+    EZColor col; uint ax, ay; bool fill; uint thick; uint r;
+    is >> col >> ax >> ay >> fill >> thick >> r;
+    setColor(col); setAnchor(ax, ay); setFilled(fill); setThickness(thick); setRadius(r);
+}
 
 Circle::~Circle() {}
 
 void Circle::setRadius(uint r) {
     setSemiWidth(r * 2);
     setSemiHeight(r * 2);
+}
+
+void Circle::write(ostream& os) const {
+    os << getRadius();
 }
 
 void Circle::modifyAttributes() {

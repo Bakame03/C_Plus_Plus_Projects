@@ -20,7 +20,11 @@ public:
     inline string getMessage() const { return msg; }
     inline void setMessage(string m) { msg = m; }
     inline int getFontNum() const { return fontNum; }
-    inline void setFontNum(int f) { fontNum = f; }
+    inline void setFontNum(int f) { 
+        if (f < 0) f = 0;
+        if (f > 3) f = 3;
+        fontNum = f; 
+    }
 
     virtual string getTypeName() const override { return "Label"; }
     virtual void draw(EZWindow& win) const override;
