@@ -9,12 +9,10 @@
 Shape::Shape(EZColor col, uint x, uint y, uint thick, bool fill)
     : color(col), anchor(x, y), filled(fill), thickness(thick) {}
 
-// Constructeur depuis un flux (pour le chargement)
+
 Shape::Shape(istream& is) : anchor(0, 0) {
-    string hexColor;
     uint ax, ay;
-    is >> hexColor >> ax >> ay >> filled >> thickness;
-    color = EZColor(hexColor);
+    is >> color >> ax >> ay >> filled >> thickness;
     anchor.setXY(ax, ay);
 }
 
