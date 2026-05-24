@@ -6,13 +6,21 @@ Label::Label(EZColor col, uint x, uint y, int font, string txt, uint thick)
 
 // Chargement
 Label::Label(istream& is) : Shape(is) {
-    is >> fontNum >> msg; // Lecture du numéro de police et du message
+    is >> fontNum;
+    char quote;
+    is >> ws >> quote; // Read the first quote
+    if (quote == '"') {
+        getline(is, msg, '"'); // Read until the next quote
+    } else {
+        is.putback(quote);
+        is >> msg;
+    }
 }
 
 Label::~Label() {}
 
 void Label::write(ostream& os) const {
-    os << fontNum << " " << msg; // Sauvegarde des deux attributs
+    os << fontNum << " \"" << msg << "\""; // Sauvegarde avec guillemets pour supporter les espaces
 }
 
 void Label::draw(EZWindow& win) const {
@@ -34,7 +42,12 @@ void Label::modifyAttributes() {
     
     switch(c) {
       case 's': Shape::modifyAttributes(); break;
-      case 'm': std::cout << "New message>"; std::cin >> m; setMessage(m); break;
+      case 'm': 
+        std::cout << "New message>"; 
+        std::cin.ignore(256, '\n');
+        std::getline(std::cin, m); 
+        setMessage(m); 
+        break;
       case 'n': std::cout << "New fontNum>"; std::cin >> f; setFontNum(f); break;
       case 'q': break;
       default: std::cout << "Error." << std::endl;
