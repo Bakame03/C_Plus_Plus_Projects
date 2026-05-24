@@ -2,6 +2,7 @@
 #define POINT_HPP
 
 #include <iostream>
+#include "ez-draw++.hpp"
 using namespace std;
 
 typedef unsigned int uint;
