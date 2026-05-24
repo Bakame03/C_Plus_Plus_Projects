@@ -46,7 +46,7 @@ public:
     // Surcharge de l'opérateur de flux (pour la sauvegarde)
     friend ostream& operator<<(ostream& os, const Shape& s);
     
-    // Méthode statique (Factory)
+    // Méthode statique 
     static Shape* load(istream& is);
 };
 

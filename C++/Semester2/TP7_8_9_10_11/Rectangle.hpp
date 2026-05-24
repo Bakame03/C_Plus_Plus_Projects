@@ -27,7 +27,6 @@ public:
     inline void setWidth(uint w) { width = w; }
     inline void setHeight(uint h) { height = h; }
 
-    // Méthodes héritées redéfinies (Polymorphisme)
     virtual string getTypeName() const override { return "Rectangle"; }
     virtual void draw(EZWindow& win) const override;
     virtual void modifyAttributes() override;
