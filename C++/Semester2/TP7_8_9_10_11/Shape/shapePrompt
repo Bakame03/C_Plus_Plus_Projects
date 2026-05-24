@@ -1,0 +1,253 @@
+so the work i have to do is related to C++ and OOP
+
+here are all the details
+
+
+
+
+
+TP n°7, 8, 9, 10 et 11 - Formes géométriques et polymorphisme
+
+Completion requirements
+
+
+
+Due: Sunday, 24 May 2026, 11:59 PM
+
+Vous devez implanter en C++, les classes formant l'arbre d'héritage de Shape  vue en TD.
+
+
+
+Ouvrir une fenêtre
+
+À titre d'introduction à la programmation d'interfaces graphiques (qui sera vue dans la ressource R2.02), vous devrez utiliser la mini-bibliothèque EZDraw++ afin d'ouvrir une simple fenêtre à l'écran. Ce sera également un premier travail de découverte d'une documentation technique (assez réduite et en français) mais également l'occasion pour vous de mettre en pratique les notions d'héritage et de polymorphisme (car elles sont nécessaires ne serait-ce que pour ouvrir une simple fenêtre).
+
+Chez vous et pas pendant le TP, vous lirez le tutoriel sur la page Web d'EZDraw++ et, en parallèle, vous étudierez les exemples fournis. Votre objectif est de savoir ouvrir une fenêtre et de savoir y dessiner quelques formes géométriques.
+
+
+
+Implanter les classes vues en TD
+
+En salle de TP, vous implanterez les classes vues en TD : Point, Shape, Rectangle et SetOfShapes.
+
+Vous devrez également créer les classes Square et Circle telles qu'expliquées en TD. Vous devrez rajouter dans Rectangle un constructeur qui permet de créer un Rectangle à l'identique d'une instance de Square (donc ayant les mêmes valeurs de largeur et hauteur) puis, sur le même principe, un constructeur de Ellipse qui permet d'en créer une à l'identique d'un Circle reçu en paramètre.
+
+Le diagramme de classe UML complété qui correspond à ce travail est consultable ci-dessous avec des marques rouges en forme de diamant pour indiquer les modification par rapport à celui de la feuille de TD.
+
+
+
+Récupérez également les fichiers présents dans l'archive suivante : [Shapes.zip]. Vous y trouverez un main.cpp et une classe MyWindow toute prête à faire fonctionner vos classes ainsi que trois Makefiles (Linux et deux pour Windows).
+
+Vous trouverez le reste des informations au sujet d'EZDraw++ dans le tutoriel, en particulier le chapitre qui concerne le dessin et la couleur. Sachez que, comme vous rentrez dans le cœur de ce pour quoi le langage C++ et la P.O.O. ont été faits (les gros projets), ce TP est un peu austère : vous allez devoir coder beaucoup pour finalement peu de résultat visuel. L'intérêt de tout cela est donc avant tout d'apprendre et de comprendre l'architecture Orientée Objet de l'exercice.
+
+
+
+Précisions sur la classe Point
+
+Dans l'implantation de la méthode « void Point::draw(EZWindow& w,bool isActive=false) const », vous dessinerez un petit carré qui s'étend de « size » pixels de part et d'autre  des coordonnées du point. Pour « size » valant 3 comme vu en TD, le carré fait donc 3+1+3 = 7 pixels de haut et de large.
+
+Si le paramètre « isActive » est à Vrai, vous devrez dessiner le carré plein et en rouge, sinon uniquement son bord et en noir. Cela permettra d'identifier visuellement les points et les formes sélectionnées par l'utilisateur.
+
+Précisions sur la classe Shape
+
+On rappelle que cette classe doit être complétée par les attributs et méthodes suivants :
+
+un booléen « filled » qui indique si la forme est pleine ou non ;
+
+deux accesseurs publics liés à cet attribut : « bool isFilled() const » et « void setFilled(bool new_value=false) » ;
+
+un entier « thickness » privé qui indique l'épaisseur avec laquelle le tracé extérieur de la forme doit être effectué et qui, par défaut, vaudra 1 ;
+
+deux accesseurs public liés à cet attribut : « int getThickness() const » et « void setThickness(int _thickness) ».
+
+On rappelle ce qui a été vu en TD :
+
+on choisit de dire qu'être au dessus d'une forme se limite à être au dessus de son ancre, autrement dit la fonction Shape::isOver() doit simplement faire appel à Point::isOver() sur l'attribut anchor.
+
+Précisions sur la classe Rectangle
+
+Dans l'implantation de la méthode « void Rectangle::draw(EZWindow& w) const », vous devrez dessiner soit un rectangle plein si l'attribut « Shape::filled » est Vrai et un rectangle vide sinon.
+
+Vous devrez faire pareil pour toutes les autres classes pouvant être dessinées de manière vide ou pleine, c'est-à-dire au moins les classes Square, Ellipse et Circle.
+
+Précisions sur la classe SetOfShapes
+
+Dans l'implantation de la méthode « void SetOfShapes::draw(EZWindow& w) const », pour chaque forme contenue dans l'ensemble, vous dessinerez d'abord cette forme puis son ancre. Lors du dessin de l'ancre, vous transmettrez à la méthode de dessin du point la valeur de l'attribut « selected » de la forme.
+
+La méthode « SetOfShapes::isOver(int mouse_x,int mouse_y) const » doit vous renvoyer la forme qui est actuellement survolée (s'il y en a une qui est survolée, c'est-à-dire que l'appel de sa fonction « Shape::isOver(int mouse_x,int mouse_y » renvoie true) ou bien qu'aucune forme n'est actuellement sous la souris. Sachant qu'il n'est pas possible de renvoyer littéralement une instance de Shape (puisque c'est une classe Abstraite) et qu'il faut aussi pouvoir renvoyer un résultat équivalent à « aucune forme », la meilleure solution consiste à renvoyer l'adresse de la forme survolée ou, sinon, nullptr.
+
+Modifier les attributs d'une forme
+
+Sur le diagramme UML de classes, vous verrez qu'il y a, dans Shape et toutes ses classes dérivées, une méthode virtuelle « modifyAttributes() ». Son rôle est de permettre à l'utilisateur de consulter et modifier les valeurs des attributs de cette classe. Pour faire cela simplement, je vous propose d'utiliser un menu textuel sur la console. Chaque niveau d'héritage apportant son lot d'attributs, il faut faire non seulement une version par classe mais également faire en sorte qu'un niveau soit capable d'appeler le niveau dont il hérite.
+
+On aura donc pour Shape quelque chose dans le style de la fonction fournie dans le fichier [Shape_modifyAttributes.cpp] de l'archive ZIP. Et pour Rectangle, on aura [Rectangle_modifyAttributes.cpp]. Incorporez le contenu de ces fichiers à vos classes correspondantes.Puis, à vous de compléter les autre classes sur le même principe.
+
+N'oubliez pas un détail important : lorsque le programme attend que l'utilisateur tape une réponse sur la console et la valide par un appui sur la touche « Entrée », le traitement des événements et donc le rafraîchissement de la fenêtre sont bloqués !
+
+
+
+
+
+Rendu
+
+Lisez attentivement toutes les consignes et respectez-les ! Vous devez rendre l'ensemble des fichiers sources C++ (.hpp et .cpp), y-compris les fichiers qui vous ont été fournis (EZDraw++ et MyWindow) afin que le projet soit complet et compilable (idéalement avec un Makefile). Pour faciliter la correction, laissez l'ensemble de ces fichiers à la racine d'un unique répertoire.
+
+Vos classes seront testées une par une (tests unitaires) puis ensemble (tests d'intégration). Il vaut donc mieux avoir seulement quelques classes qui marchent parfaitement (pour gagner une partie de points), que d'essayer de faire un peu de tout sans rien finir donc sans que rien ne  compile et marche du tout (n'avoir aucun point).
+
+Indiquez-moi si vous avez besoin d'une précision supplémentaire.
+
+Complément à « Formes géométriques et polymorphisme » : supprimer la dépendance de Shape à ses classes dérivées
+Completion requirements
+L'implantation de la méthode de classe « Shape* Shape::load(istream&) », telle que vue en TD, a le mérite d'être assez simple à comprendre mais elle est très loin d'être idéale.  En effet, cela oblige le fichier Shape.cpp à inclure Rectangle.hpp, Circle.hpp, Ellipse.hpp, Square.hpp, etc., puis à ajouter un groupe « else if() » dans « Shape::load(istream&) » pour chaque classe de forme. Si on veut rajouter une nouvelle classe dérivant de Shape (directement ou non), il faut inclure un nouveau fichier de déclaration de cette classe puis ajouter un « else if() » et enfin recompiler Shape.cpp...
+
+Or les règles de la Programmation Orientée Objet, en particulier celles qu'on rassemble sous l'acronyme « SOLID » (cf. Wikipédia), préconisent qu'il doit être possible de rajouter une nouvelle forme au programme, par exemple une étoile grâce à une nouvelle classe Star dérivée de Shape, sans avoir à modifier (et encore moins à recompiler) la classe Shape.
+
+En résumé, il est naturel que les classes filles dépendent de leur classe mère... mais l'inverse est très malsain et doit être évité !
+
+Dans la suite de ce document, il vous est proposé de voir comment modifier la classe Shape pour qu'il ne soit plus nécessaire de la modifier pour rajouter une nouvelle classe dérivée tout en conservant le fonctionnement général de notre factory.
+
+Principe général
+Le principe général de la solution proposée va être d'installer dans la classe Shape une liste d'associations entre d'une part une chaîne de caractères constante décrivant un type, par exemple « "Rectangle" » et une fonction factory capable de créer dynamiquement une nouvelle instance de la classe correspondante et d'en renvoyer l'adresse comme résultat. La méthode « Shape* Shape::load(istream&) » se résume alors à chercher à partir de la chaîne trouvée dans le fichier quelle fonction appeler, à l'appeler, puis à renvoyer le résultat que cette fonction a donné.
+
+Techniques à étudier pour comprendre l'implantation qui va suivre
+Quitte à approfondir le cours et les TD, autant en profiter pour apprendre de nouvelles techniques modernes de programmation C++ ! Pour comprendre la suite, vous devrez comprendre les techniques suivantes qui n'ont pas toutes été vues en cours :
+
+la création et l'initialisation d'une variable membre de classe (vu en cours) ;
+la création d'un patron de fonction membre (vu en cours) ;
+l'utilisation de la classe ostringstream de la bibliothèque standard ;
+l'utilisation du patron de conteneur associatif std::map<TypeClé,TypeValeur> (documentation) souvent nommé en français « dictionnaire », et qui est intégré à la bibliothèque standard de patrons C++ (STL) (évoqué en cours) ;
+les fonctions courtes anonymes créées à la volée, souvent appelées « fonctions lambda » (à étudier par soi-même) ;
+la boucle for() généralisée pour le parcours d'un conteneur énumérable, parfois appelée « for each » ou « range based for » ;
+la déduction automatique du type d'une variable à partir de son initialisation (mot-clé « auto » introduit, sous ce sens, en C++11) (à étudier par soi-même).
+Première étape : prévenir la classe abstraite Shape de l’existence de chaque classe fille concrète
+Dans la déclaration de la classe MyWindow dans le fichier MyWindow.hpp, nous allons ajouter la déclaration d'un booléen en donnée membre privée de classe :
+
+class MyWindow : public EZWindow {
+  ...
+private:
+  static bool needInitialization;
+};
+
+Dans le fichier MyWindow.cpp, nous ajoutons ce qu'il faut pour le définir et l'initialiser :
+
+bool MyWindow::needInitialization = true;
+
+Ce booléen va nous servir à détecter la première fois qu'une instance de MyWindow sera créée. En effet, l'initialisation que nous devons faire n'a besoin d'être faite qu'une et une seule fois. Or il est imaginable qu'on fasse plusieurs instances de la classe MyWindow pour avoir plusieurs fenêtres indépendantes avec chacune son propre dessin... même si ce n'est pas ce que fait le programme d'exemple fourni. On ne doit donc faire l'initialisation qu'à la première construction et pas lors des suivantes.
+
+Dans le corps du constructeur de MyWindow, on ajoute :
+
+ if(needInitialization) // Ne faire l'initialisation que la première fois qu'une MyWindow est construite.
+  {
+   needInitialization=false;
+   Shape::register_factory_function<Rectangle>("Rectangle");
+   Shape::register_factory_function<Ellipse>("Ellipse");
+   Shape::register_factory_function<Square>("Square");
+   Shape::register_factory_function<Circle>("Circle");
+   Shape::print_registered_factory_functions(cout);
+  }
+
+L'initialisation consiste à appeler le patron de méthode de classe « Shape::register_factory_function<NewShape>("NewShape") » en précisant en paramètre du patron (dans les « <...> ») le type de la nouvelle forme et en paramètre de la fonction (dans les « (...) ») la chaîne correspondante. Cela associe la chaîne à une factory pour le type du même nom.
+
+À titre de mise au point, la fonction « Shape::print_registered_factory_functions(cout) » est ensuite appelée pour afficher la liste de toutes les factory qui auront été ainsi abonnées auprès de la classe Shape.
+
+Deuxième étape : modifier la déclaration de la classe Shape
+Modifier le fichier Forme.hpp grâce aux indications suivantes :
+
+// Pour la Factory avancée :
+#include <string>
+#include <map>
+
+class Shape {
+  ... // Partie déjà traitée en TD
+private:
+  typedef Shape* (*factory_function)(istream& is);
+  static map<string,factory_function> factories;
+public:
+  template<typename classType>
+  static void register_factory_function(const char *className)
+    { factories[className] = [](istream& is)-> Forme* { return new classType(is); }; }
+  static void print_registered_factory_functions(std::ostream& os);
+};
+
+Le typedef permet de définir un nouveau type « factory_function » qui correspond à un pointeur sur une fonction qui prend une référence à un flux d'entrée (istream&) et qui renvoie l'adresse d'une nouvelle instance dérivée de Forme.
+
+Le map<string,factory_function> permet de constituer un ensemble d'associations entre une chaîne, par exemple « "Rectangle" » et une (adresse de) factory_function. Cette structure de donnée est associée à la classe Shape elle-même et pas à ses instances (mot-clé static).
+
+Le patron de fonction membre de classe permet d'associer dans le map, à la chaîne « className », une lambda qui s'occupe de créer dynamiquement une instance de la classe « classType » à partir du flux d'entrée et d'en renvoyer l'adresse. On rappelle que l'implantation des patrons de fonction membre doit toujours être faite dans un fichier include, comme c'est le cas ici.
+
+Troisième étape : modifier l'implantation de la classe Shape
+Dans le fichier Shape.cpp, retirer :
+
+les inclusions des fichiers de déclaration des classes filles de Shape : Rectangle.hpp, Ellipse.hpp, etc. ;
+remplacer l'implantation d'origine de la méthode Shape* Shape::charger(istream& is) par celle ci-dessous.
+Ajouter en tête du fichier :
+
+#include <sstream>
+
+car nous utiliserons plus bas un ostringstream.
+
+Ensuite, ajouter au fichier :
+
+map<string,Shape::factory_function> Shape::factories;
+
+Cette ligne crée l'instance du dictionnaire associatif déclaré précédemment. et qui contiendra la liste associations chaîne + fonctions factory associée à cette chaîne.
+
+Ajouter ensuite :
+
+void Shape::print_registered_factory_functions(ostream& os)
+{
+  os << "Classes dont les factory ont été enregistrées associées à une chaîne de typage :" << endl;
+  for(const auto& e : factories) // Liste les paires (chaîne,lambda de construction)
+    os << e.first << endl; // Affiche le premier élément de la paire, c'est-à-dire le nom de la classe.
+}
+
+Cette fonction de classe permet de lister toutes les formes qui ont fait enregistrer une factory dans le map. Cette fonction utilise la boucle « for » généralisée introduite par C++11 : à chaque tour, la variable e sera une référence à l'une des paires contenues dans factories. Le premier élément de la paire (e.first) est écrit sur os : il s'agit de la chaîne de caractères à laquelle la factory est associée. Cette fonction n'est pas indispensable au mécanisme ; elle est présente pour permettre d'étudier son bon fonctionnement.
+
+Ajouter enfin la nouvelle implantation de Shape::load(istream&) :
+
+Shape *Shape::load(istream& is)
+{
+ string typeName;
+ is >> typeName;
+ try
+ {
+   factory_function f = factories.at(typeName);
+   Shape *shape = (*f)(is);
+   return shape;
+ }
+ catch (std::range_error& e)
+ {
+    std::ostringstream oss;
+    oss << "Chaine de type de forme inconnue \"" << typeName << "\". Impossible de créer cette forme et donc de continuer. Abandon.";
+    throw std::runtime_error(oss.str());
+ }
+}
+
+Comme précédemment, on lit une chaîne de caractère puis on cherche à quoi elle correspond mais au lieu de le faire avec une série de « if() ... else if() ... », on utilise maintenant l'association stockée dans le map. Pour cela, on tente de trouver une correspondance avec la méthode at() à laquelle on donne la chaîne et qui nous renvoie l'adresse de la fonction factory à appeler s'il y en a une. S'il n'y en a pas, la méthode at() lance une exception range_error que le catch va attraper. Dans ce cas, on prépare un message d'erreur clair (avec l'aide d'un ostringstream) qu'on va ensuite utiliser pour lancer une autre exception de type runtime_error pour signaler qu'il est impossible de créer cette forme car son nom est inconnu.
+
+Last modified: Wednesday, 13 May 2026, 3:21 PM
+
+
+
+so here is how i want us to work:
+
+- i sent you the pdf of the TD he was talking about
+- i sent you also the notes that the teacher gave us regarding OOP concepts
+
+- analyze deeply this project
+
+- propose me a plan on how we can achieve this, coz i wanna us to this carefully step by step task by task, when one task done then continue with the next one as we did for the previous project do not give full code in one output response give step by step by explaining each step it's only when i got the step that we move to the next one
+- make sure you use only codes level/concepts/logique vuent en cours, coz the teacher don't like that we use AI generated codes, so each line of code you will give me, make sure it has a logic of a debutant junior developer so that the teacher can see that i use the code which is on my level
+
+- each time you use a concept/logic in code tell me if it is something that we have seen in class or not
+- so i sent you also all the codes he gave us that will help us for this
+
+- before continue ask me all questions in order to understand deeply the project and ask me for QT and C++ OOP notes pdf files 
+
+usefull links:
+-> https://fr.wikipedia.org/wiki/SOLID_(informatique)
+-> https://cplusplus.com/reference/sstream/ostringstream/?kw=ostringstream
+-> https://cplusplus.com/reference/map/map/
+-> http://eric.remy3.free.fr/EZ-Draw++/EZ-Draw++-1.2-6/html/index.html
+
+- before continue ask me all questions in order to understand deeply the project or if there is anything you wanna know before we start
