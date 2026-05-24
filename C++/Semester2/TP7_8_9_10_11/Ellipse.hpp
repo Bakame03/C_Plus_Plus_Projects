@@ -7,7 +7,7 @@ class Circle;
 
 class Ellipse : public Shape {
 private:
-    uint width, height;
+    uint semiWidth, semiHeight;
 
 protected:
     virtual void write(ostream& os) const override;
@@ -19,10 +19,10 @@ public:
 
     virtual ~Ellipse();
 
-    inline uint getWidth() const { return width; }
-    inline uint getHeight() const { return height; }
-    inline void setWidth(uint w) { width = w; }
-    inline void setHeight(uint h) { height = h; }
+    inline uint getSemiWidth() const { return semiWidth; }
+    inline uint getSemiHeight() const { return semiHeight; }
+    inline void setSemiWidth(uint w) { semiWidth = w; }
+    inline void setSemiHeight(uint h) { semiHeight = h; }
 
     virtual string getTypeName() const override { return "Ellipse"; }
     virtual void draw(EZWindow& win) const override;

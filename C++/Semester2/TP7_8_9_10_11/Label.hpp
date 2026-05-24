@@ -5,20 +5,20 @@
 
 class Label : public Shape {
 private:
-    string text;
-    int fontNum; // Attribut ajouté
+    string msg;
+    int fontNum;
 
 protected:
     virtual void write(ostream& os) const override;
 
 public:
-    Label(EZColor col, uint x, uint y, string txt, int font, uint thick = 1);
+    Label(EZColor col, uint x, uint y, int font, string txt, uint thick = 1);
     Label(istream& is);
     virtual ~Label();
 
     // Accesseurs et Mutateurs
-    inline string getText() const { return text; }
-    inline void setText(string t) { text = t; }
+    inline string getMessage() const { return msg; }
+    inline void setMessage(string m) { msg = m; }
     inline int getFontNum() const { return fontNum; }
     inline void setFontNum(int f) { fontNum = f; }
 

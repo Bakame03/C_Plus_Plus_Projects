@@ -1,4 +1,9 @@
 #include "Shape.hpp"
+#include "Rectangle.hpp"
+#include "Square.hpp"
+#include "Ellipse.hpp"
+#include "Circle.hpp"
+#include "Label.hpp"
 
 // Constructeur principal
 Shape::Shape(EZColor col, uint x, uint y, uint thick, bool fill)
@@ -7,8 +12,10 @@ Shape::Shape(EZColor col, uint x, uint y, uint thick, bool fill)
 // Constructeur depuis un flux (pour le chargement)
 Shape::Shape(istream& is) : anchor(0, 0) {
     string hexColor;
-    is >> hexColor >> filled >> thickness;
+    uint ax, ay;
+    is >> hexColor >> ax >> ay >> filled >> thickness;
     color = EZColor(hexColor);
+    anchor.setXY(ax, ay);
 }
 
 // Destructeur virtuel
@@ -79,7 +86,9 @@ void Shape::modifyAttributes()
 
 // Opérateur d'affichage global
 ostream& operator<<(ostream& os, const Shape& s) {
-    os << s.getTypeName() << " " << s.getColor() << " " << s.getAnchor() << " ";
+    os << s.getTypeName() << " " << s.getColor() << " "
+       << s.getAnchor() << " "
+       << s.isFilled() << " " << s.getThickness() << " ";
     s.write(os); 
     return os;
 }

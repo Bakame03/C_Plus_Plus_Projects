@@ -18,9 +18,11 @@ bool Point::isOver(uint mouseX, uint mouseY) const {
 
 void Point::draw(EZWindow& win, bool filled) const {
     if (filled) {
-        win.fillCircle(x, y, size);
+        win.setColor(EZColor::red);
+        win.fillRectangle(x - size, y - size, x + size, y + size);
     } else {
-        win.drawCircle(x, y, size);
+        win.setColor(EZColor::black);
+        win.drawRectangle(x - size, y - size, x + size, y + size);
     }
 }
 

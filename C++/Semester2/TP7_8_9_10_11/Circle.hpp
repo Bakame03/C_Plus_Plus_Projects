@@ -12,7 +12,7 @@ public:
     virtual ~Circle();
 
     // Accesseur et Mutateur
-    inline uint getRadius() const { return getWidth() / 2; }
+    inline uint getRadius() const { return getSemiWidth() / 2; }
     void setRadius(uint r);
 
     // Redéfinition des méthodes virtuelles

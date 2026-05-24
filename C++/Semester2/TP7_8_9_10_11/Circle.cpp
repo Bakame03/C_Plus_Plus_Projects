@@ -10,8 +10,8 @@ Circle::Circle(istream& is) : Ellipse(is) {}
 Circle::~Circle() {}
 
 void Circle::setRadius(uint r) {
-    setWidth(r * 2);
-    setHeight(r * 2);
+    setSemiWidth(r * 2);
+    setSemiHeight(r * 2);
 }
 
 void Circle::modifyAttributes() {

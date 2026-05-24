@@ -1,39 +1,40 @@
 #include "Label.hpp"
 
 // Constructeur
-Label::Label(EZColor col, uint x, uint y, string txt, int font, uint thick)
-    : Shape(col, x, y, thick, false), text(txt), fontNum(font) {}
+Label::Label(EZColor col, uint x, uint y, int font, string txt, uint thick)
+    : Shape(col, x, y, thick, false), msg(txt), fontNum(font) {}
 
 // Chargement
 Label::Label(istream& is) : Shape(is) {
-    is >> text >> fontNum; // Lecture du texte et du numéro de police
+    is >> fontNum >> msg; // Lecture du numéro de police et du message
 }
 
 Label::~Label() {}
 
 void Label::write(ostream& os) const {
-    os << text << " " << fontNum; // Sauvegarde des deux attributs
+    os << fontNum << " " << msg; // Sauvegarde des deux attributs
 }
 
 void Label::draw(EZWindow& win) const {
     win.setColor(getColor());
     win.setThickness(getThickness());
-    win.drawText(getAnchor().getX(), getAnchor().getY(), text);
+    win.setFont(fontNum);
+    win.drawText(EZAlign::TL, getAnchor().getX(), getAnchor().getY(), msg);
 }
 
 void Label::modifyAttributes() {
-  char c; string t; int f;
+  char c; string m; int f;
   do {
     std::cout << "Current attributes values are:" << std::endl
     << "s - sub-menu Shape" << std::endl
-    << "t - text = " << getText() << std::endl
+    << "m - message = " << getMessage() << std::endl
     << "n - fontNum = " << getFontNum() << std::endl
     << "q - quit" << std::endl
     << "Choice?>"; std::cin >> c;
     
     switch(c) {
       case 's': Shape::modifyAttributes(); break;
-      case 't': std::cout << "New text>"; std::cin >> t; setText(t); break;
+      case 'm': std::cout << "New message>"; std::cin >> m; setMessage(m); break;
       case 'n': std::cout << "New fontNum>"; std::cin >> f; setFontNum(f); break;
       case 'q': break;
       default: std::cout << "Error." << std::endl;

@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include "ez-draw++.hpp"
-#include "Point.hpp"
+#include "point.hpp"
 
 using namespace std;
 
