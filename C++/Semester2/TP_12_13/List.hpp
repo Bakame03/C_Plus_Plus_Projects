@@ -2,6 +2,7 @@
 #define __LIST_HPP__
 
 #include <iostream>
+#include <stdexcept> 
 
 template <typename T>
 class List
@@ -34,6 +35,37 @@ class List
         ~List();
         
         inline size_t size() const { return count; }
+
+        // --- Sous-classes Itérateurs ---
+        class Iterator {
+            private:
+                Node* current;
+            public:
+                Iterator(Node* n) : current(n) {}
+                T& operator*() { return current->value; }
+                Iterator& operator++() { current = current->next; return *this; }
+                bool operator!=(const Iterator& other) const { return current != other.current; }
+        };
+
+        class ConstIterator {
+            private:
+                Node* current;
+            public:
+                ConstIterator(Node* n) : current(n) {}
+                const T& operator*() const { return current->value; }
+                ConstIterator& operator++() { current = current->next; return *this; }
+                bool operator!=(const ConstIterator& other) const { return current != other.current; }
+        };
+
+        // --- Méthodes pour utiliser le range-based for loop ---
+        Iterator begin() { return Iterator(first); }
+        Iterator end() { return Iterator(nullptr); }
+        ConstIterator begin() const { return ConstIterator(first); }
+        ConstIterator end() const { return ConstIterator(nullptr); }
+
+        // --- Opérateur d'accès par index ---
+        T& operator[](size_t index);
+        const T& operator[](size_t index) const;
         
         // Ici je remplace les std::string par T
         const T& front() const;
@@ -308,6 +340,29 @@ void List<T>::sort()
     listeTriee.first = nullptr;
     listeTriee.last = nullptr;
     listeTriee.count = 0;
+}
+
+// --- Implémentation de l'opérateur [] ---
+template <typename T>
+T& List<T>::operator[](size_t index)
+{
+    Node* courant = first;
+    for (size_t i = 0; i < index && courant != nullptr; i++)
+        courant = courant->next;
+    
+    if (courant == nullptr) throw std::out_of_range("Index out of range");
+    return courant->value;
+}
+
+template <typename T>
+const T& List<T>::operator[](size_t index) const
+{
+    Node* courant = first;
+    for (size_t i = 0; i < index && courant != nullptr; i++)
+        courant = courant->next;
+        
+    if (courant == nullptr) throw std::out_of_range("Index out of range");
+    return courant->value;
 }
 
 #endif
