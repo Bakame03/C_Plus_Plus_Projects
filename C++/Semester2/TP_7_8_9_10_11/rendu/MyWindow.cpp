@@ -20,6 +20,7 @@ using namespace std;
 #include "Square.hpp"
 #include "Label.hpp"
 #include "Enveloppe.hpp"
+#include "Exercise.hpp"
 
 MyWindow::MyWindow(int w, int h,const char *name)
  : EZWindow(w,h,name),shapes(200),ctrlPressed(false)
@@ -126,18 +127,18 @@ void MyWindow::buttonPress(int mouse_x,int mouse_y,int button)
         selectedShapes.clear();
       }
       Shape *s = shapes.isOver(mouse_x,mouse_y);
-      if(s!=nullptr)
+      /* if(s!=nullptr)
       {
         std::vector<Shape*>::iterator it = std::find(selectedShapes.begin(),selectedShapes.end(),s);
         if(it==selectedShapes.end()) // Si la forme n'est pas déjà sélectionnée
-        {
+        {DrapeauSuisse
           selectedShapes.push_back(s); // selectedShapes.push_back(s); // On l'ajoute aux sélectionnées
         }
         else // sinon, c'est-à-dire si elle est déjà sélectionnée
         {
           selectedShapes.erase(it);   // On la retire des sélectionnées
         }
-      }
+      } */
     }
     sendExpose();
   }
@@ -238,6 +239,7 @@ void MyWindow::keyPress(EZKeySym keysym) // Une touche du clavier a ete enfoncé
        ctrlPressed = true;
        break;
      case EZKeySym::v: shapes.add(new Enveloppe(EZColor::black,getWidth()/2-50,getHeight()/2-25,100,false)); break;
+     case EZKeySym::d: shapes.add(new Exercise(EZColor::red,getWidth()/2-75,getHeight()/2-75,150)); break;
      default:
       break;
     }
