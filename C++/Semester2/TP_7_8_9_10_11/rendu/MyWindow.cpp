@@ -19,6 +19,7 @@ using namespace std;
 #include "Rectangle.hpp"
 #include "Square.hpp"
 #include "Label.hpp"
+#include "Enveloppe.hpp"
 
 MyWindow::MyWindow(int w, int h,const char *name)
  : EZWindow(w,h,name),shapes(200),ctrlPressed(false)
@@ -86,6 +87,7 @@ MyWindow::MyWindow(int w, int h,const char *name)
           s->setFontNum(s->getFontNum()+1);
       }
     } ));
+  buttons.add(new UI::LambdaButton<MyWindow>(620,1,70,15,"envelope",[](MyWindow& win){ win.shapes.add(new Enveloppe(EZColor::black,win.getWidth()/2-50,win.getHeight()/2-25,100,false)); }));
 #endif
 
 }
@@ -235,6 +237,7 @@ void MyWindow::keyPress(EZKeySym keysym) // Une touche du clavier a ete enfoncé
      case EZKeySym::Control_L:
        ctrlPressed = true;
        break;
+     case EZKeySym::v: shapes.add(new Enveloppe(EZColor::black,getWidth()/2-50,getHeight()/2-25,100,false)); break;
      default:
       break;
     }

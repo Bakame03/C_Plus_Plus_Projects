@@ -4,6 +4,7 @@
 #include "Ellipse.hpp"
 #include "Circle.hpp"
 #include "Label.hpp"
+#include "Enveloppe.hpp"
 
 // Constructeur principal
 Shape::Shape(EZColor col, uint x, uint y, uint thick, bool fill)
@@ -99,6 +100,7 @@ Shape* Shape::load(istream& is) {
     if (type == "Label")     return new Label(is);
     if (type == "Square")    return new Square(is);
     if (type == "Circle")    return new Circle(is);
+    if (type == "Enveloppe") return new Enveloppe(is);
 
     return nullptr;
 }

@@ -14,7 +14,8 @@ RM       = rm -f
 EXE      =
 
 OBJECTS= Point.o Shape.o Rectangle.o SetOfShapes.o
-OBJECTS+= Ellipse.o Square.o Circle.o Label.o
+OBJECTS+= Ellipse.o Square.o Circle.o Label.o 
+OBJECTS+= Enveloppe.o
 OBJECTS+= MyWindow.o main.o ez-draw++.o
 
 # Liste les fichiers de dépendances en remplaçant l'extension *.o par *.d)
